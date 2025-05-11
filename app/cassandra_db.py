@@ -29,11 +29,20 @@ WITH replication = {{'class':'SimpleStrategy','replication_factor':1}}
 # Set the keyspace
 session.set_keyspace(CASSANDRA_KEYSPACE)
 
-# Create table if it doesn't exist
+# Create books table if it doesn't exist
 session.execute(
     """ CREATE TABLE IF NOT EXISTS books(
     book_id TEXT PRIMARY KEY,
     title TEXT
+    )
+"""
+)
+
+# Create users table if it doesn't exist
+session.execute(
+    """ CREATE TABLE IF NOT EXISTS users(
+    username TEXT PRIMARY KEY,
+    hashed_password TEXT
     )
 """
 )
