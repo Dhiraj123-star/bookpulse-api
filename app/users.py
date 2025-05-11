@@ -16,3 +16,13 @@ def verify_user(username: str, password: str):
     if not user or not pwd_context.verify(password, user.hashed_password):
         return None
     return user
+
+def create_user(username: str, password: str):
+    # Check if username exists
+    if get_user(username):
+        raise ValueError("Username already exists")
+    hashed_password = pwd_context.hash(password)
+    session.execute(
+        "INSERT INTO users (username, hashed_password) VALUES (%s, %s)",
+        (username, hashed_password)
+    )

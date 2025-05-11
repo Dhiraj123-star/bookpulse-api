@@ -1,14 +1,22 @@
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from app.models import Book
+from app.models import Book, UserCreate
 from app.cassandra_db import insert_book, get_book
 from app.cache import get_cached_book, set_cached_book
 from app.auth import create_access_token, get_current_user
-from app.users import verify_user
+from app.users import verify_user, create_user
 
 app = FastAPI()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+@app.post("/register")
+def register(user: UserCreate):
+    try:
+        create_user(user.username, user.password)
+        return {"status": "User registered"}
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 @app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
