@@ -10,6 +10,11 @@ A real-time, scalable Book Reviews API built with ⚡ FastAPI, 🪐 Cassandra, �
   - Post, fetch, and update reviews instantly.
   - Built-in Redis pub-sub via Valkey for real-time performance.
 
+- 👤 **User Registration & Management**
+  - `POST /register` endpoint to securely register users.
+  - Prevents duplicate usernames and hashes passwords before storing.
+  - JWT-based access with a 60-minute expiry window for secure sessions.
+
 - 🧵 **Event-Driven Architecture**
   - Integrates message queues for real-time processing.
   - Ensures decoupled services for better scalability.
@@ -19,8 +24,8 @@ A real-time, scalable Book Reviews API built with ⚡ FastAPI, 🪐 Cassandra, �
   - Schema modeled for time-series and real-time access.
 
 - 🛡️ **JWT Authentication**
-  - Secure login and access with token-based auth.
-  - Protects user and review endpoints.
+  - Secure login and token-based access for protected routes.
+  - Access tokens expire in 60 minutes for better security.
 
 - 🔍 **Efficient Book Search**
   - Search reviews and books by title or keywords.
@@ -42,7 +47,7 @@ A real-time, scalable Book Reviews API built with ⚡ FastAPI, 🪐 Cassandra, �
 - **Cassandra** – Distributed NoSQL DB for fast read/write.
 - **Valkey (Redis-compatible)** – Real-time caching and pub/sub.
 - **Docker & Docker Compose** – Environment management.
-- **JWT** – Authentication and authorization.
+- **JWT** – Authentication and authorization with expiration policy.
 - **Async/Await** – Fully asynchronous backend logic.
 
 ---
@@ -50,7 +55,7 @@ A real-time, scalable Book Reviews API built with ⚡ FastAPI, 🪐 Cassandra, �
 ## 🧪 Use Cases
 
 - Realtime review system for books, authors, and genres.
-- Book recommendation engine (future-ready).
+- User-specific recommendations and interactions.
 - Distributed backend architecture with CQRS potential.
 
 ---
